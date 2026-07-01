@@ -1,7 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { ProductGrid, SearchBar } from '@/features/products';
 
-// This component runs ONLY on the server
+export const dynamic = 'force-dynamic';
+
 export default async function ProductsPage({
   searchParams,
 }: {
