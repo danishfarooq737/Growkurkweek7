@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Lab 2 — Server & Client Components (Standalone, Railway-connected)
 
-## Getting Started
+This is a **complete, runnable Next.js project** for Lab 2 — not just an
+overlay of a few files. Unzip it and run it directly.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## What's inside
+```
+Lab02_Server_Client_Components/
+├── package.json
+├── next.config.js
+├── tailwind.config.js
+├── postcss.config.js
+├── tsconfig.json
+├── .env.example
+├── .gitignore
+├── prisma/
+│   ├── schema.prisma      -> Product + Category models
+│   └── seed.ts            -> sample data
+├── lib/
+│   └── prisma.ts          -> Prisma client singleton
+└── app/
+    ├── layout.tsx
+    ├── page.tsx            -> home page, links to /products
+    ├── globals.css
+    └── (shop)/products/
+        ├── page.tsx        -> Server Component, fetches products
+        ├── ProductGrid.tsx -> Client Component, Add to Cart
+        └── SearchBar.tsx   -> Client Component, search input
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup — run these in order
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd Lab02_Server_Client_Components
+npm install
+cp .env.example .env
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+Now open `.env` and paste your real Railway connection string
+(Railway dashboard -> Postgres service -> Connect tab -> Postgres Connection URL).
 
-## Learn More
+```bash
+npx prisma db push
+npx prisma generate
+npm run seed
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open `http://localhost:3000` in your browser.
